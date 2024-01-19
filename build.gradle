@@ -36,7 +36,11 @@ dependencies {
 
     implementation 'software.amazon.awssdk:s3:2.21.26'
 
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.5'
+    // https://mvnrepository.com/artifact/org.eclipse.angus/angus-mail
+    implementation 'org.eclipse.angus:angus-mail:2.0.2'
+
+
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.5'
 
 }
 

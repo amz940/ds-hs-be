@@ -11,33 +11,33 @@ import org.apache.ibatis.annotations.Select;
 public interface HsFileMapper {
 
     @Insert("""
-        INSERT INTO prj2.businesspicture(businessId,name)
+        INSERT INTO businesspicture(businessId,name)
         VALUES (#{id},#{originalFilename})
         """)
     int insert(Integer id, String originalFilename);
 
     @Select("""
         SELECT *
-        FROM prj2.businesspicture
+        FROM businesspicture
         WHERE Id = #{id}
         """)
     HsFile selectById(Integer id);
 
     @Delete("""
-        DELETE FROM prj2.businesspicture
+        DELETE FROM businesspicture
         WHERE id = #{id}
         """)
     int deleteById(Integer id);
 
     @Select("""
         SELECT id,name
-        FROM prj2.businesspicture
+        FROM businesspicture
         WHERE businessId = #{businessId}
         """)
     List<HsFile> selectByHsId(Integer businessId);
 
     @Delete("""
-        DELETE FROM prj2.businesspicture
+        DELETE FROM businesspicture
         WHERE businessId = #{businessId}
         """)
     void deleteByHsId(Integer businessId);

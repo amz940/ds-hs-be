@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c27f44e9.css",
+    "main.js": "/static/js/main.d3e79e87.js",
+    "static/media/GowunDodum-Regular.ttf": "/static/media/GowunDodum-Regular.af5304a39dc307a26989.ttf",
+    "static/media/Dongle-Regular.ttf": "/static/media/Dongle-Regular.ad2fb3fae6812a072add.ttf",
+    "static/media/크리스마스 배너.PNG": "/static/media/크리스마스 배너.62ffe415ec3bddf1bc6b.PNG",
+    "static/media/배경화면.jpg": "/static/media/배경화면.1c67a82bff4e10c029f5.jpg",
+    "static/media/로그인화면.png": "/static/media/로그인화면.b6d818e7a1185af5a3d5.png",
+    "static/media/로고1.png": "/static/media/로고1.f59bc10a6b9ee82a2e47.png",
+    "index.html": "/index.html",
+    "main.c27f44e9.css.map": "/static/css/main.c27f44e9.css.map",
+    "main.d3e79e87.js.map": "/static/js/main.d3e79e87.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c27f44e9.css",
+    "static/js/main.d3e79e87.js"
+  ]
+}

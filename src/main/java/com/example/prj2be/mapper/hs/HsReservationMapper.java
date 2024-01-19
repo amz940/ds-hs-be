@@ -14,39 +14,39 @@ public interface HsReservationMapper {
 
     @Select("""
         SELECT id,openHour,openMin,closeHour,closeMin,restHour,restMin,restCloseHour,restCloseMin
-        FROM prj2.business
+        FROM business
         WHERE business.id = #{id}
         """)
     Hs selectByBusinessId(Integer id);
 
     @Insert("""
-        INSERT INTO prj2.businessreservation(businessId, memberId, reservationDate, reservationHour, reservationMin, comment,isReservationCheck)
+        INSERT INTO businessreservation(businessId, memberId, reservationDate, reservationHour, reservationMin, comment,isReservationCheck)
         VALUES (#{businessId},#{memberId},#{reservationDate},#{reservationHour},#{reservationMin},#{comment},false)
         """)
     int insert(HsReservation reservation);
 
     @Delete("""
-        DELETE FROM prj2.businessreservation
+        DELETE FROM businessreservation
         WHERE businessId = #{id}
         """)
     void deleteByBusinessId(Integer id);
 
     @Select("""
         SELECT *
-        FROM prj2.businessreservation
+        FROM businessreservation
         WHERE id = #{id}
         """)
     HsReservation selectById(Integer id);
 
     @Delete("""
-        DELETE FROM prj2.businessreservation
+        DELETE FROM businessreservation
         WHERE id = #{id}
         """)
     int remove(Integer id);
 
     @Select("""
         SELECT r.memberId, r.reservationDate, r.reservationHour, r.reservationMin,r.id,b.name,r.comment,r.isReservationCheck,m.nickName
-        FROM prj2.businessreservation r JOIN prj2.business b on b.id = r.businessId JOIN prj2.member m on m.id = r.memberId
+        FROM businessreservation r JOIN business b on b.id = r.businessId JOIN member m on m.id = r.memberId
         WHERE r.memberId =#{memberId} AND r.isReservationCheck = false
         ORDER BY r.reservationDate
         """)
@@ -54,7 +54,7 @@ public interface HsReservationMapper {
 
     @Select("""
         SELECT r.memberId, r.reservationDate, r.reservationHour, r.reservationMin, r.id,b.name, r.comment, r.isReservationCheck
-        FROM prj2.businessreservation r JOIN prj2.business b on b.id = r.businessId
+        FROM businessreservation r JOIN business b on b.id = r.businessId
         WHERE r.memberId = #{memberId} AND r.isReservationCheck = true
         ORDER BY r.reservationDate
         """)
@@ -62,7 +62,7 @@ public interface HsReservationMapper {
 
     @Select("""
         SELECT m.nickName, r.reservationDate, r.reservationHour, r.reservationMin, r.id, r.comment, r.isReservationCheck
-        FROM prj2.businessreservation r JOIN prj2.member m on m.id = r.memberId
+        FROM businessreservation r JOIN member m on m.id = r.memberId
         WHERE r.businessId = #{id}
         ORDER BY r.reservationDate
         """)
@@ -71,14 +71,14 @@ public interface HsReservationMapper {
 
     @Select("""
         SELECT id, name
-        FROM prj2.business
+        FROM business
         WHERE memberId = #{memberId}
         AND category = 'hospital'
         """)
     List<Hs> selectByMemberIdBList(String memberId);
 
     @Update("""
-        UPDATE prj2.businessreservation
+        UPDATE businessreservation
         SET isReservationCheck = true
         WHERE id = #{reservationId}
         """)
@@ -86,7 +86,7 @@ public interface HsReservationMapper {
 
     @Select("""
         SELECT m.nickName, r.reservationDate, r.reservationHour, r.reservationMin, r.id, r.comment, r.isReservationCheck
-        From businessreservation r JOIN prj2.member m on m.id = r.memberId
+        From businessreservation r JOIN member m on m.id = r.memberId
         WHERE businessId = #{businessId} AND isReservationCheck = TRUE
         ORDER BY r.reservationDate
         """)

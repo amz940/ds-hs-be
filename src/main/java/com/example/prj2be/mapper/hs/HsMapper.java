@@ -19,12 +19,12 @@ public interface HsMapper {
                 b.restHour,b.restMin,b.restCloseHour,b.restCloseMin,
                b.content,b.category,b.nightCare,b.phone,
                 COUNT(DISTINCT b2.id) countLike, mc.medicalCourseCategory, bh.holiday,b.memberId
-            FROM prj2.business b
-                left join prj2.businesslike b2
+            FROM business b
+                left join businesslike b2
                     on b.id = b2.businessId
-                left join prj2.medicalcourse mc
+                left join medicalcourse mc
                     on b.id = mc.medicalCourseId
-                left join prj2.businessholiday bh
+                left join businessholiday bh
                     on b.id = bh.businessId
         WHERE b.category = 'hospital'
             AND (b.name LIKE #{keyword} OR b.oldAddress LIKE #{keyword} OR mc.medicalCourseCategory LIKE #{keyword})
@@ -38,12 +38,12 @@ public interface HsMapper {
                 b.restHour,b.restMin,b.restCloseHour,b.restCloseMin,
                b.content,b.category,b.nightCare,b.phone,
                 COUNT(DISTINCT b2.id) countLike, mc.medicalCourseCategory, bh.holiday
-        FROM prj2.business b
-            left join prj2.businesslike b2
+        FROM business b
+            left join businesslike b2
                 on b.id = b2.businessId
-            left join prj2.medicalcourse mc
+            left join medicalcourse mc
                 on b.id = mc.medicalCourseId
-            left join prj2.businessholiday bh
+            left join businessholiday bh
                 on b.id = bh.businessId
         WHERE b.category = 'hospital'
             AND mc.medicalCourseCategory = #{course}
@@ -53,14 +53,14 @@ public interface HsMapper {
     List<Hs> selectByCategory(String course);
 
     @Insert("""
-        INSERT INTO prj2.business(name,memberId,address,oldAddress,phone,openHour,openMin,restHour,restMin,restCloseHour,restCloseMin,closeHour,closeMin,info,content,category,nightCare,homePage)
+        INSERT INTO business(name,memberId,address,oldAddress,phone,openHour,openMin,restHour,restMin,restCloseHour,restCloseMin,closeHour,closeMin,info,content,category,nightCare,homePage)
         VALUES (#{name},#{memberId},#{address},#{oldAddress},#{phone},#{openHour},#{openMin},#{restHour},#{restMin},#{restCloseHour},#{restCloseMin},#{closeHour},#{closeMin},#{info},#{content},'hospital',#{nightCare},#{homePage})
         """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Hs hs);
 
     @Update("""
-        UPDATE prj2.business
+        UPDATE business
         SET name = #{name},
         address = #{address},
         oldAddress = #{oldAddress},
@@ -83,34 +83,34 @@ public interface HsMapper {
 
     @Select("""
             SELECT *
-            FROM prj2.business 
+            FROM business 
             WHERE id = #{id}
         """)
     Hs selectById(Integer id);
 
     @Delete("""
-        DELETE FROM prj2.business
+        DELETE FROM business
         WHERE id = #{id}
         """)
     int deleteById(Integer id);
 
 
     @Insert("""
-        INSERT INTO prj2.medicalcourse(medicalCourseId, medicalCourseCategory) 
+        INSERT INTO medicalcourse(medicalCourseId, medicalCourseCategory) 
         VALUES (#{id},#{medicalCourse})
         """)
     void insertCourse(Integer id, String medicalCourse);
 
     @Select("""
         SELECT id,medicalCourseId,medicalCourseCategory
-        FROM prj2.medicalcourse
+        FROM medicalcourse
         WHERE medicalCourseId =#{id}
         """)
     List<HsCourse> courseSelectByBusinessId(Integer id);
 
     @Delete("""
-        DELETE FROM prj2.medicalcourse
-        WHERE prj2.medicalcourse.medicalCourseId = #{id}
+        DELETE FROM medicalcourse
+        WHERE medicalcourse.medicalCourseId = #{id}
         """)
     void courseDeleteByBusinessId(Integer id);
 
@@ -128,7 +128,7 @@ public interface HsMapper {
 
     @Select("""
         SELECT *
-        FROM prj2.businessholiday
+        FROM businessholiday
         WHERE businessId = #{id}
         """)
     List<BusinessHoliday> holidaySelectByBusinessId(Integer id);
@@ -151,7 +151,7 @@ public interface HsMapper {
         <script>
         SELECT COUNT(*)
         FROM business b
-            JOIN prj2.medicalcourse m on b.id = m.medicalCourseId
+            JOIN medicalcourse m on b.id = m.medicalCourseId
             <where prefixOverrides="OR">
                 <if test="list == 'all' or list == 'name'">
                     OR b.name LIKE #{keyword}

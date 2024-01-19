@@ -10,35 +10,35 @@ import org.apache.ibatis.annotations.Select;
 public interface HsLikeMapper {
 
     @Delete("""
-        DELETE FROM prj2.businesslike
+        DELETE FROM businesslike
         WHERE businessId = #{businessId}
         AND memberId = #{memberId}
         """)
     int delete(HsLike like);
 
     @Insert("""
-        INSERT INTO prj2.businesslike(memberId, businessId) 
+        INSERT INTO businesslike(memberId, businessId) 
         VALUES (#{memberId},#{businessId})
         """)
     int insert(HsLike like);
 
     @Select("""
         SELECT COUNT(id)
-        FROM prj2.businesslike
+        FROM businesslike
         WHERE businessId = #{businessId}
         """)
     int countByBoardId(Integer businessId);
 
     @Select("""
         SELECT *
-        FROM prj2.businesslike
+        FROM businesslike
         WHERE businessId = #{businessId}
         AND memberId = #{memberId}
         """)
     HsLike selectByBusinessIdAndMemberId(Integer businessId, String memberId);
 
     @Delete("""
-        DELETE FROM prj2.businesslike
+        DELETE FROM businesslike
         WHERE businessId = #{id}
         """)
     void deleteByBusinessId(Integer id);

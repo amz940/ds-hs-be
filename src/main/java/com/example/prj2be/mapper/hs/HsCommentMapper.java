@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Update;
 public interface HsCommentMapper {
 
     @Insert("""
-        INSERT INTO prj2.businesscomment(memberId,businessId,comment) 
+        INSERT INTO businesscomment(memberId,businessId,comment) 
         VALUES (#{memberId},#{businessId},#{comment})
         """)
     int insert(HsComment comment);
@@ -25,7 +25,7 @@ public interface HsCommentMapper {
         bc.inserted,
         bc.memberId,
         m.nickName memberNickName
-        FROM prj2.businesscomment bc JOIN prj2.member m on bc.memberId = m.id
+        FROM businesscomment bc JOIN member m on bc.memberId = m.id
         WHERE businessId = #{businessId}
         ORDER BY id DESC
         LIMIT #{from}, 5
@@ -40,7 +40,7 @@ public interface HsCommentMapper {
     HsComment selectById(Integer id);
 
     @Update("""
-        UPDATE prj2.businesscomment
+        UPDATE businesscomment
         SET comment = #{comment}
         WHERE id = #{id}
         """)
